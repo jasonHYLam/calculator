@@ -33,25 +33,18 @@ function populateDisplay(displayText) {
     display.innerText += (displayText);
 }
 
-function accessNumber(button) {
-    chosenNumber = button.innerText;
-}
-
 numberButtons.forEach(e => {
     const number = Number(e.innerText);
     e.addEventListener("click", function() {
         populateDisplay(number);
         digitArray.push(number);
-    });
-
-    e.addEventListener("click", function() {
-        accessNumber(e);
+        operatorButtons.forEach(e => e.disabled = false);
     });
 });
 
 operatorButtons.forEach(e => {
     e.addEventListener("click", function() {
-        
+
         populateDisplay(e.innerText);
         fuseDigits();
         pushToNumberArray(joinedDigits);
@@ -59,10 +52,12 @@ operatorButtons.forEach(e => {
 
         operate(chosenOperator, numbersArray);
 
-        accessOperator(e);
+        changeOperator(e);
 
         operatorArray.push(chosenOperator);
         digitArray = [];
+        
+        operatorButtons.forEach(e => e.disabled = true);
     });
 })
 
@@ -74,7 +69,7 @@ operatorButtons.forEach(e => {
 
 
 
-function accessOperator(button) {
+function changeOperator(button) {
     const operator = button.innerText;
     switch(operator) {
         case "+":

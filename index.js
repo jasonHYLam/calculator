@@ -108,7 +108,9 @@ function operate(currentOperator, numbersArray) {
     // if (numbersArray.length < 2) {
     //     return;
     // } 
-    const output = numbersArray.reduce(currentOperator);
+    //round to 2 d.p
+    const output = Math.round(numbersArray.reduce(currentOperator) * 100) / 100;
+
     popFromNumberArray();
     console.log("current output is: " + output);
     pushToNumberArray(output);

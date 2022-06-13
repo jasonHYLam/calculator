@@ -2,6 +2,7 @@ let display = document.querySelector(".display");
 const numberButtons = document.querySelectorAll(".digit");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals-button");
+const clearButton = document.querySelector(".clear-button");
 
 let joinedDigits = 0;
 let chosenNumber = "a";
@@ -65,6 +66,7 @@ operatorButtons.forEach(e => {
 
 equalsButton.addEventListener("click", function() {
     clearDisplay();
+
     fuseDigits();
     pushToNumberArray(joinedDigits);
     display.innerText = "Result: " + operate(chosenOperator, numbersArray);
@@ -72,7 +74,16 @@ equalsButton.addEventListener("click", function() {
     digitArray = [];
 });
 
+clearButton.addEventListener("click", function() {
+    clearCalculator();
+});
 
+function clearCalculator() {
+    digitArray = [];
+    numbersArray = [];
+    chosenOperator = function() {};
+    display.innerText = "Result: ";
+}
 
 function changeOperator(button) {
     const operator = button.innerText;

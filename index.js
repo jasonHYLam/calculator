@@ -4,6 +4,10 @@ const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals-button");
 const clearButton = document.querySelector(".clear-button");
 
+operatorButtons.forEach(e => e.disabled = true);
+equalsButton.disabled = true;
+
+
 let joinedDigits = 0;
 let chosenNumber = "a";
 let chosenOperator = function() {};
@@ -83,6 +87,8 @@ function clearCalculator() {
     numbersArray = [];
     chosenOperator = function() {};
     display.innerText = "Result: ";
+    operatorButtons.forEach(e => e.disabled = true);
+    equalsButton.disabled = true;
 }
 
 function changeOperator(button) {
@@ -108,8 +114,8 @@ function operate(currentOperator, numbersArray) {
     // if (numbersArray.length < 2) {
     //     return;
     // } 
-    //round to 2 d.p
-    const output = Math.round(numbersArray.reduce(currentOperator) * 100) / 100;
+    //round to 3 d.p
+    const output = Math.round(numbersArray.reduce(currentOperator) * 1000) / 1000;
 
     popFromNumberArray();
     console.log("current output is: " + output);

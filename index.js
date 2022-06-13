@@ -39,6 +39,7 @@ numberButtons.forEach(e => {
         populateDisplay(number);
         digitArray.push(number);
         operatorButtons.forEach(e => e.disabled = false);
+        equalsButton.disabled = false;
     });
 });
 
@@ -58,14 +59,18 @@ operatorButtons.forEach(e => {
         digitArray = [];
         
         operatorButtons.forEach(e => e.disabled = true);
+        equalsButton.disabled = true;
     });
 })
 
-// equalsButton.addEventListener("click", function() {
-//     clearDisplay();
-//     display.innerText = "Result: " + operate(chosenOperator, digitArray);
-//     popOperatorArray();
-// });
+equalsButton.addEventListener("click", function() {
+    clearDisplay();
+    fuseDigits();
+    pushToNumberArray(joinedDigits);
+    display.innerText = "Result: " + operate(chosenOperator, numbersArray);
+    console.log("Result: " + operate(chosenOperator, numbersArray));
+    digitArray = [];
+});
 
 
 
@@ -89,9 +94,9 @@ function changeOperator(button) {
 
 
 function operate(currentOperator, numbersArray) {
-    if (numbersArray.length < 2) {
-        return;
-    } 
+    // if (numbersArray.length < 2) {
+    //     return;
+    // } 
     const output = numbersArray.reduce(currentOperator);
     popFromNumberArray();
     console.log("current output is: " + output);

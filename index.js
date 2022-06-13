@@ -51,28 +51,26 @@ numberButtons.forEach(e => {
 
 operatorButtons.forEach(e => {
     e.addEventListener("click", function() {
-        fuseDigits();
-    })
-    
-    e.addEventListener("click", function() {
+        
         populateDisplay(e.innerText);
-    });
+        fuseDigits();
+        pushToNumberArray(joinedDigits);
 
-    e.addEventListener("click", function() {
-        operate(chosenOperator, digitArray);
-    });
 
-    e.addEventListener("click", function() {
+        operate(chosenOperator, numbersArray);
+
         accessOperator(e);
+
         operatorArray.push(chosenOperator);
+        digitArray = [];
     });
 })
 
-equalsButton.addEventListener("click", function() {
-    clearDisplay();
-    display.innerText = "Result: " + operate(chosenOperator, digitArray);
-    popOperatorArray();
-});
+// equalsButton.addEventListener("click", function() {
+//     clearDisplay();
+//     display.innerText = "Result: " + operate(chosenOperator, digitArray);
+//     popOperatorArray();
+// });
 
 
 
@@ -81,7 +79,6 @@ function accessOperator(button) {
     switch(operator) {
         case "+":
             chosenOperator = add;
-            console.log("ye");
             break;
         case "-":
             chosenOperator = subtract;
@@ -96,9 +93,14 @@ function accessOperator(button) {
 }
 
 
-function operate(currentOperator, digitArray) {
-    const output = digitArray.reduce(currentOperator);
-    console.log(output);
+function operate(currentOperator, numbersArray) {
+    if (numbersArray.length < 2) {
+        return;
+    } 
+    const output = numbersArray.reduce(currentOperator);
+    popFromNumberArray();
+    console.log("current output is: " + output);
+    pushToNumberArray(output);
     return output;
 }
 
@@ -114,7 +116,10 @@ function fuseDigits() {
         joinedDigits = Number(digitArray.toString().split(",").join(""));
     }
 
-function pushToNumberArray() {
-    numbersArray.push(joinedDigits);
+function pushToNumberArray(number) {
+    numbersArray.push(number);
 }
 
+function popFromNumberArray() {
+    numbersArray.splice(0, 2);
+}

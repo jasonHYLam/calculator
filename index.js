@@ -56,11 +56,12 @@ operatorButtons.forEach(e => {
         pushToNumberArray(joinedDigits);
 
 
-        operate(chosenOperator, numbersArray);
-
+        const output = operate(chosenOperator, numbersArray);
+        if (output === "Please clear!") {
+            display.innerText = "Result: Please clear!";
+        }
         changeOperator(e);
 
-        operatorArray.push(chosenOperator);
         digitArray = [];
         
         operatorButtons.forEach(e => e.disabled = true);
@@ -89,6 +90,7 @@ function clearCalculator() {
     display.innerText = "Result: ";
     operatorButtons.forEach(e => e.disabled = true);
     equalsButton.disabled = true;
+    numberButtons.forEach(e => e.disabled = false);
 }
 
 function changeOperator(button) {
@@ -111,16 +113,21 @@ function changeOperator(button) {
 
 
 function operate(currentOperator, numbersArray) {
-    // if (numbersArray.length < 2) {
-    //     return;
-    // } 
-    //round to 3 d.p
+    
     const output = Math.round(numbersArray.reduce(currentOperator) * 1000) / 1000;
+    if (output === Infinity || output === NaN) {
+        clearCalculator();
+        operatorButtons.forEach(e => e.disabled = true);
+        equalsButton.disabled = true;
+        numberButtons.forEach(e => e.disabled = true);
+        return "Please clear!";
 
-    popFromNumberArray();
-    console.log("current output is: " + output);
-    pushToNumberArray(output);
-    return output;
+    } else {
+        popFromNumberArray();
+        console.log("current output is: " + output);
+        pushToNumberArray(output);
+        return output;
+    }
 }
 
 function clearDisplay() {

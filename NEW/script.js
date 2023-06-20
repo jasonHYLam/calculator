@@ -32,3 +32,8 @@ function operate(firstNumber, operator, secondNumber) {
     }
 }
 
+const numbers = document.querySelectorAll(".numbers");
+
+numbers.forEach(number => {
+    number.addEventListener('click', (e) => console.log(e.target))
+})

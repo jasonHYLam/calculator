@@ -37,7 +37,7 @@ const input= document.querySelectorAll(".input");
 input.forEach(input=> {
     input.addEventListener('click', (e) => {
         populateDisplay(e.target.textContent);
-        console.log(e.target.textContent);
+        // console.log(e.target.textContent);
     } )
 })
 
@@ -59,16 +59,43 @@ function evaluateDisplay() {
     const currentDisplayInput = getCurrentDisplayInput();
     const splitInput = currentDisplayInput.split("");
     console.log(splitInput)
+
+    findNumberFromDisplayInput(splitInput);
+
     //obtain section of string before first operator
-    let currentNumber = '';
+    function findNumberFromDisplayInput(splitInput) {
+        let currentNumber = '';
+        for (i in splitInput) {
+            if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
+            currentNumber = currentNumber + splitInput[i];
+            }
+        // console.log(currentNumber, i);
+        return [currentNumber, i];
+    }
 
-    for (i in splitInput) {
-        if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
-        currentNumber = currentNumber + splitInput[i];
-        }
+    function findOperatorFromDisplayInput(splitInput) {
+            const operator = splitInput.find(char => char == "+" || char == "-" || char == "*" || char == "/" );
+        return [operator, splitInput.indexOf(operator)]
+    }
 
-    console.log(currentNumber);
-    // evaluate a pair of numbers
+    // console.log(findOperatorFromDisplayInput(splitInput));
+    // evaluate a pair of numbers using function operate()
+
+    function deleteFromDisplayInput(splitInput, index) {
+        console.log(splitInput.splice(0, index))
+        return splitInput.splice(0, index)
+    }
+
+    let [currentNumber, index] = findNumberFromDisplayInput(splitInput);
+    console.log('test');
+    console.log(index);
+    console.log(deleteFromDisplayInput(splitInput, index))
+    // let modifiedInput = deleteFromDisplayInput(splitInput, index);
+    // console.log(modifiedInput)
+    
+
+
+    operate()
 }
 
 const equalButton = document.querySelector("#equal-button");

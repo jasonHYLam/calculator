@@ -1,0 +1,25 @@
+#calculator {
+    width: 60vw;
+}
+#display {
+
+    background-color: bisque;
+}
+#container{
+    display: flex;
+}
+
+#left-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#right-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#operators {
+    display: flex;
+    flex-direction: column;
+}

@@ -32,10 +32,10 @@ function operate(firstNumber, operator, secondNumber) {
     }
 }
 
-const numbers = document.querySelectorAll(".numbers");
+const input= document.querySelectorAll(".input");
 
-numbers.forEach(number => {
-    number.addEventListener('click', (e) => {
+input.forEach(input=> {
+    input.addEventListener('click', (e) => {
         populateDisplay(e.target.textContent)
     } )
 })
@@ -43,5 +43,5 @@ numbers.forEach(number => {
 // function to populate the display
 function populateDisplay(input) {
     let display = document.querySelector("#display");
-    display.textContent = input;
+    display.textContent += input;
 }

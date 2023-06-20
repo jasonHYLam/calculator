@@ -35,5 +35,13 @@ function operate(firstNumber, operator, secondNumber) {
 const numbers = document.querySelectorAll(".numbers");
 
 numbers.forEach(number => {
-    number.addEventListener('click', (e) => console.log(e.target))
+    number.addEventListener('click', (e) => {
+        populateDisplay(e.target.textContent)
+    } )
 })
+
+// function to populate the display
+function populateDisplay(input) {
+    let display = document.querySelector("#display");
+    display.textContent = input;
+}

@@ -22,3 +22,8 @@ console.log(divide(4,10))
 let firstNumber = 0;
 let operator; 
 let secondNumber = 0;
+
+// calls the above functions depending on value of operator.
+function operate(firstNumber, operator, secondNumber) {
+    switch
+}

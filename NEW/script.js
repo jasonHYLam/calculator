@@ -97,6 +97,7 @@ function evaluateDisplay() {
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
     let operator = findOperatorFromDisplayInput(splitInput);
+    console.log(operator);
     let index = findIndexOfCurrentOperator(splitInput);
 
     // delete current operator to find next number and operator.
@@ -106,7 +107,7 @@ function evaluateDisplay() {
     let nextNumber = Number(findNumberFromDisplayInput(splitInput));
     index = findIndexOfCurrentNumber(splitInput);
 
-    // delete index of next number
+    // delete next number, using its index
     deleteFromDisplayInput(splitInput, index);
 
 
@@ -114,10 +115,11 @@ function evaluateDisplay() {
     while (splitInput.length != 0) {
         // set current output to the firstNumber variable
         let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
-        console.log(currentCalculationOutput);
+        console.log(currentCalculationOutput)
 
         // set current output to first number
         firstNumber = currentCalculationOutput;
+        console.log(firstNumber)
         // find next operator
         operator = findOperatorFromDisplayInput(splitInput);
         // delete next operator
@@ -125,17 +127,23 @@ function evaluateDisplay() {
 
         // find next number
         nextNumber = Number(findNumberFromDisplayInput(splitInput));
+        console.log(nextNumber)
         deleteFromDisplayInput(splitInput, index);
 
         currentCalculationOutput = operate(firstNumber, operator, nextNumber);
 
-        // console.log(currentCalculationOutput);
-        // console.log(splitInput);
         populateDisplayWithCalculation(currentCalculationOutput)
     }
+}
+
+function clearDisplay() {
+    const displayInput = document.querySelector("#display");
+    displayInput.textContent = "";
 }
 
 const equalButton = document.querySelector("#equal-button");
 
 equalButton.addEventListener('click', evaluateDisplay);
-equalButton.addEventListener('click', (e) => console.log(e.target));
+
+const allClearButton = document.querySelector("#all-clear-button");
+allClearButton.addEventListener('click', clearDisplay);

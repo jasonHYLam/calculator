@@ -36,15 +36,20 @@ const input= document.querySelectorAll(".input");
 
 input.forEach(input=> {
     input.addEventListener('click', (e) => {
-        populateDisplay(e.target.textContent);
+        populateDisplayWithInput(e.target.textContent);
         // console.log(e.target.textContent);
     } )
 })
 
 // function to populate the display
-function populateDisplay(input) {
+function populateDisplayWithInput(input) {
     let display = document.querySelector("#display");
     display.textContent += input;
+}
+
+function populateDisplayWithCalculation(calculation) {
+    let display = document.querySelector("#display");
+    display.textContent = calculation;
 }
 
 function getCurrentDisplayInput() {
@@ -65,14 +70,12 @@ function evaluateDisplay() {
             if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
             currentNumber = currentNumber + splitInput[i];
             }
-        // console.log(currentNumber, i);
         return currentNumber;
     }
 
     function findIndexOfCurrentNumber(splitInput) {
         for (i in splitInput) {
             if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
-            // currentNumber = currentNumber + splitInput[i];
             }
             return i;
     }
@@ -91,60 +94,45 @@ function evaluateDisplay() {
         return splitInput.splice(0, index)
     }
 
-
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
     let operator = findOperatorFromDisplayInput(splitInput);
     let index = findIndexOfCurrentOperator(splitInput);
-    console.log('test the index');
-    console.log(index)
 
     // delete current operator to find next number and operator.
     deleteFromDisplayInput(splitInput, index);
-    console.log('test');
-    console.log(splitInput)
 
     //obtain next number from the display input
-    let nextNumber = Number(findNumberFromDisplayInput(splitInput)); //issue here
+    let nextNumber = Number(findNumberFromDisplayInput(splitInput));
     index = findIndexOfCurrentNumber(splitInput);
-    // console.log('test index');
-    // obtain index of next number
-    // console.log(index)
 
-    console.log('test index');
     // delete index of next number
     deleteFromDisplayInput(splitInput, index);
 
-    // console.log(firstNumber)
-    // console.log(operator)
-    // console.log(nextNumber)
-    // let modifiedInput = deleteFromDisplayInput(splitInput, index);
-    // console.log(modifiedInput)
-    
-    console.log('next split')
-    console.log(splitInput);
 
-    // set current output to the firstNumber variable
-    let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
-    console.log(currentCalculationOutput);
-    // set current output to first number
-    firstNumber = currentCalculationOutput;
-    // find next operator
-    operator = findOperatorFromDisplayInput(splitInput);
-    deleteFromDisplayInput(splitInput, index);
+    // start loop here
+    while (splitInput.length != 0) {
+        // set current output to the firstNumber variable
+        let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
+        console.log(currentCalculationOutput);
 
-    nextNumber = Number(findNumberFromDisplayInput(splitInput));
+        // set current output to first number
+        firstNumber = currentCalculationOutput;
+        // find next operator
+        operator = findOperatorFromDisplayInput(splitInput);
+        // delete next operator
+        deleteFromDisplayInput(splitInput, index);
 
-    console.log('next set of values for next operation');
-    console.log(firstNumber)
-    console.log(operator)
-    console.log(nextNumber)
+        // find next number
+        nextNumber = Number(findNumberFromDisplayInput(splitInput));
+        deleteFromDisplayInput(splitInput, index);
 
-    currentCalculationOutput = operate(firstNumber, operator, nextNumber);
-    // find next number
-    console.log(currentCalculationOutput);
+        currentCalculationOutput = operate(firstNumber, operator, nextNumber);
 
-
+        // console.log(currentCalculationOutput);
+        // console.log(splitInput);
+        populateDisplayWithCalculation(currentCalculationOutput)
+    }
 }
 
 const equalButton = document.querySelector("#equal-button");

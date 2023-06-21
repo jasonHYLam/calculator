@@ -54,15 +54,11 @@ function getCurrentDisplayInput() {
 }
 
 function evaluateDisplay() {
-    // convert from string to numbers
-    // evaluate if input is a number
+    
     const currentDisplayInput = getCurrentDisplayInput();
     const splitInput = currentDisplayInput.split("");
-    console.log(splitInput)
 
-    findNumberFromDisplayInput(splitInput);
-
-    //obtain section of string before first operator
+    // convert from string to numbers
     function findNumberFromDisplayInput(splitInput) {
         let currentNumber = '';
         for (i in splitInput) {
@@ -70,32 +66,85 @@ function evaluateDisplay() {
             currentNumber = currentNumber + splitInput[i];
             }
         // console.log(currentNumber, i);
-        return [currentNumber, i];
+        return currentNumber;
+    }
+
+    function findIndexOfCurrentNumber(splitInput) {
+        for (i in splitInput) {
+            if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
+            // currentNumber = currentNumber + splitInput[i];
+            }
+            return i;
     }
 
     function findOperatorFromDisplayInput(splitInput) {
             const operator = splitInput.find(char => char == "+" || char == "-" || char == "*" || char == "/" );
-        return [operator, splitInput.indexOf(operator)]
+        return operator;
     }
 
-    // console.log(findOperatorFromDisplayInput(splitInput));
-    // evaluate a pair of numbers using function operate()
+    function findIndexOfCurrentOperator(splitInput) {
+            const operator = splitInput.find(char => char == "+" || char == "-" || char == "*" || char == "/" );
+        return splitInput.indexOf(operator)+1;
+    }
 
     function deleteFromDisplayInput(splitInput, index) {
-        console.log(splitInput.splice(0, index))
         return splitInput.splice(0, index)
     }
 
-    let [currentNumber, index] = findNumberFromDisplayInput(splitInput);
+
+    //obtain first number from display input
+    let firstNumber = Number(findNumberFromDisplayInput(splitInput));
+    let operator = findOperatorFromDisplayInput(splitInput);
+    let index = findIndexOfCurrentOperator(splitInput);
+    console.log('test the index');
+    console.log(index)
+
+    // delete current operator to find next number and operator.
+    deleteFromDisplayInput(splitInput, index);
     console.log('test');
-    console.log(index);
-    console.log(deleteFromDisplayInput(splitInput, index))
+    console.log(splitInput)
+
+    //obtain next number from the display input
+    let nextNumber = Number(findNumberFromDisplayInput(splitInput)); //issue here
+    index = findIndexOfCurrentNumber(splitInput);
+    // console.log('test index');
+    // obtain index of next number
+    // console.log(index)
+
+    console.log('test index');
+    // delete index of next number
+    deleteFromDisplayInput(splitInput, index);
+
+    // console.log(firstNumber)
+    // console.log(operator)
+    // console.log(nextNumber)
     // let modifiedInput = deleteFromDisplayInput(splitInput, index);
     // console.log(modifiedInput)
     
+    console.log('next split')
+    console.log(splitInput);
+
+    // set current output to the firstNumber variable
+    let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
+    console.log(currentCalculationOutput);
+    // set current output to first number
+    firstNumber = currentCalculationOutput;
+    // find next operator
+    operator = findOperatorFromDisplayInput(splitInput);
+    deleteFromDisplayInput(splitInput, index);
+
+    nextNumber = Number(findNumberFromDisplayInput(splitInput));
+
+    console.log('next set of values for next operation');
+    console.log(firstNumber)
+    console.log(operator)
+    console.log(nextNumber)
+
+    currentCalculationOutput = operate(firstNumber, operator, nextNumber);
+    // find next number
+    console.log(currentCalculationOutput);
 
 
-    operate()
 }
 
 const equalButton = document.querySelector("#equal-button");

@@ -8,57 +8,66 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>
+    <div id="outer-body">
 
-    </div>
-    <div id="calculator">
-        <div id="display-container">
-            <div id="display"></div>
-        </div>
-        <div id="container">
-
-            <div id="left-container">
-                <div id="row1" class="row">
-                    <button class="number input">7</button>
-                    <button class="number input">8</button>
-                    <button class="number input">9</button>
-                </div>
-                <div id="row2" class="row">
-                    <button class="number input">4</button>
-                    <button class="number input">5</button>
-                    <button class="number input">6</button>
-                </div>
-                <div id="row3" class="row">
-                    <button class="number input">1</button>
-                    <button class="number input">2</button>
-                    <button class="number input">3</button>
-                </div>
-                <div id="row4" class="row">
-                    <button class="number input">0</button>
-                    <button class="decimal input">.</button>
-                </div>
+        <div id="calculator">
+            <div id="display-container">
+                <div id="display"></div>
             </div>
-            <div id="right-container">
-                <div id="clear" class="row">
-                    <button id="backspace-button">DEL</button>
-                    <button id="all-clear-button">AC</button>
-                </div>
-                <div id="operators">
-                    <div id="left-row1" class="row">
-                        <button class="operator input">+</button>
-                        <button class="operator input">-</button>
+            <div id="container">
+
+                <div id="left-container-container">
+                    <div id="left-container">
+                        <div id="row1" class="row">
+                            <button class="number input">7</button>
+                            <button class="number input">8</button>
+                            <button class="number input">9</button>
+                        </div>
+                        <div id="row2" class="row">
+                            <button class="number input">4</button>
+                            <button class="number input">5</button>
+                            <button class="number input">6</button>
+                        </div>
+                        <div id="row3" class="row">
+                            <button class="number input">1</button>
+                            <button class="number input">2</button>
+                            <button class="number input">3</button>
+                        </div>
+                        <div id="row4" class="row">
+                            <button class="number input">0</button>
+                            <button class="decimal input">.</button>
+                        </div>
                     </div>
-                    <div id="left-row2" class="row">
-                        <button class="operator input">*</button>
-                        <button class="operator input">/</button>
-                    </div>
+
                 </div>
+
+                <div id="right-container-container">
+                    <div id="right-container">
+                        <div id="clear" class="row">
+                            <button id="backspace-button">DEL</button>
+                            <button id="all-clear-button">AC</button>
+                        </div>
+                        <div id="operators">
+                            <div id="left-row1" class="row">
+                                <button class="operator input">+</button>
+                                <button class="operator input">-</button>
+                            </div>
+                            <div id="left-row2" class="row">
+                                <button class="operator input">*</button>
+                                <button class="operator input">/</button>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="equal-button">=</button>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div>
-                    <button id="equal-button">=</button>
                 </div>
             </div>
-            <div>
-            </div>
+
         </div>
 
     </div>

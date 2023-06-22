@@ -41,11 +41,20 @@ input.forEach(input=> {
     } )
 })
 
+
 //disable operator button when a operator button is clicked. 
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         operatorButtons.forEach(button => button.disabled=true)
+    });
+})
+
+// enable operator buttons when number is clicked.
+const numberButtons = document.querySelectorAll(".number");
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        operatorButtons.forEach(button => button.disabled = false);
     });
 })
 

@@ -11,15 +11,33 @@
     border: solid 4px black;
     /* justify-self: center; */
 }
+
+#display-container {
+    background-color: aquamarine;
+
+    border-bottom: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 #display {
 
+    padding-right: 10px;
+    padding-top: 10px;
+
+    /* align-self: center; */
     background-color: bisque;
-    margin-bottom: 40px;
-    border-bottom: solid;
+    margin-bottom: 30px;
+    margin-top: 25px;
     text-align: right;
+    width: 360px;
+    height: 100px;
 }
 #container{
     display: flex;
+    margin-top: 25px;
 }
 
 #left-container {
@@ -47,19 +65,16 @@
     gap: 20px;
 }
 
-#display {
-    height: 80px;
-}
 button {
     /* width: 50px;
     height: 50px; */
-    box-shadow: ;
+    /* box-shadow: ; */
 }
 
 .row {
     display: flex;
     justify-content: space-around;
-    align-items: ;
+    /* align-items: ; */
     /* gap: 20px; */
 
 }

@@ -50,11 +50,17 @@ operatorButtons.forEach(button => {
     });
 })
 
-// enable operator buttons when number is clicked.
+// disable decimal button when clicked.
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener('click', () => decimalButton.disabled = true);
+
+
+// enable operator buttons and decimal button when number button is clicked.
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         operatorButtons.forEach(button => button.disabled = false);
+        // decimalButton.disabled = false;
     });
 })
 
@@ -183,3 +189,7 @@ allClearButton.addEventListener('click', clearDisplay);
 
 const backspaceButton = document.querySelector("#backspace-button");
 backspaceButton.addEventListener('click', backspace);
+
+let testString = '1.2';
+console.log(testString)
+console.log(Number(testString));

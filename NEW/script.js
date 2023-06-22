@@ -14,9 +14,9 @@ function divide(a, b) {
     return a/b;
 }
 
-let firstNumber = 0;
-let operator; 
-let secondNumber = 0;
+// let firstNumber = 0;
+// let operator; 
+// let secondNumber = 0;
 
 // calls the above functions depending on value of operator.
 function operate(firstNumber, operator, secondNumber) {
@@ -39,6 +39,14 @@ input.forEach(input=> {
         populateDisplayWithInput(e.target.textContent);
         // console.log(e.target.textContent);
     } )
+})
+
+//disable operator button when a operator button is clicked. 
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        operatorButtons.forEach(button => button.disabled=true)
+    });
 })
 
 // function to populate the display
@@ -88,8 +96,10 @@ function evaluateDisplay() {
         return Number(splitInput.indexOf(operator))+1; // testing the original index rather than index+0
     }
 
+ 
+    // new numbers and operators are processed by deleting the previous numbers and operators
     function deleteFromDisplayInput(splitInput, index) {
-        return splitInput.splice(0, index) //must be index+1; if index is 0, then the length of splice must be 1.
+        return splitInput.splice(0, index);
     }  
 
     function isOperatorExists(splitInput) {
@@ -100,63 +110,41 @@ function evaluateDisplay() {
     const currentDisplayInput = getCurrentDisplayInput();
     const splitInput = currentDisplayInput.split("");
 
-    console.log(`first array: ${splitInput}`);
 
- 
+    // check if the input string ends with a number; if not, then return to cancel calculation.
+    let lastChar = (splitInput.slice(-1)[0])
+    if (!Number.isInteger(Number(lastChar))) return;
+
+
+
 
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
     let index = findIndexOfCurrentNumber(splitInput);
-    console.log(`index of first number: ${index}`)
     deleteFromDisplayInput(splitInput, index);
-    console.log(`after deleting first number: ${splitInput}`);
+
+
 
     let operator;
     let nextNumber = 0;
 
     // start loop here
     while (splitInput.length != 0) {
-        console.log('does operator exist');
-        console.log(isOperatorExists(splitInput));
         if (isOperatorExists(splitInput)) {
             operator = findOperatorFromDisplayInput(splitInput);
         }
-        console.log(`operator: ${operator}`);
         index = findIndexOfCurrentOperator(splitInput);
-        console.log(`operator index: ${index}`)
         deleteFromDisplayInput(splitInput, index);
-        console.log(`after deleting operator: ${splitInput}`);
 
         nextNumber = Number(findNumberFromDisplayInput(splitInput));
         if (isOperatorExists(splitInput)) {
             index = findIndexOfCurrentNumber(splitInput);
-        } else {index = Number(findIndexOfCurrentNumber(splitInput))+1} //not sure if this does anything
-         console.log(`index of next number: ${index}`);
-       
-       
+        } else {index = Number(findIndexOfCurrentNumber(splitInput))+1} //deletes final string
         deleteFromDisplayInput(splitInput, index);
-        console.log(`after deleting next number: ${splitInput}`);
 
         // set current output to the firstNumber variable
         let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
-        console.log(`current calc output: ${currentCalculationOutput}`)
-
-        // set current output to first number
         firstNumber = currentCalculationOutput;
-        console.log(firstNumber)
-    //     // find next operator
-    //     operator = findOperatorFromDisplayInput(splitInput);
-    //     // delete next operator
-    //     deleteFromDisplayInput(splitInput, index);
-
-    //     // find next number
-    //     nextNumber = Number(findNumberFromDisplayInput(splitInput));
-    //     console.log(nextNumber)
-    // // index = findIndexOfCurrentNumber(splitInput);
-
-    //     deleteFromDisplayInput(splitInput, index);
-
-    //     currentCalculationOutput = operate(firstNumber, operator, nextNumber);
 
         populateDisplayWithCalculation(currentCalculationOutput)
     }
@@ -170,8 +158,12 @@ function clearDisplay() {
 function backspace() {
     const displayInput = document.querySelector("#display");
     displayInput.textContent = displayInput.textContent.slice(0, -1);
-
 }
+
+// check if the current text contains operator or ends with number
+const displayInput = document.querySelector("#display")
+// check for when display input text changes
+displayInput.addEventListener('onchange', (e)=> {console.log(e.target)});
 
 const equalButton = document.querySelector("#equal-button");
 
@@ -182,13 +174,3 @@ allClearButton.addEventListener('click', clearDisplay);
 
 const backspaceButton = document.querySelector("#backspace-button");
 backspaceButton.addEventListener('click', backspace);
-
-// console.log('test display input');
-// getCurrentDisplayInput();
-
-// let testString = '7+8+9+10';
-// let testArray = testString.split("");
-// console.log(testArray);
-// for (i in testArray) {
-//     console.log(i);
-// }

@@ -60,7 +60,7 @@ const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         operatorButtons.forEach(button => button.disabled = false);
-        // decimalButton.disabled = false;
+        decimalButton.disabled = false;
     });
 })
 

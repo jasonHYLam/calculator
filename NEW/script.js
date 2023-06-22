@@ -100,56 +100,46 @@ function evaluateDisplay() {
     const currentDisplayInput = getCurrentDisplayInput();
     const splitInput = currentDisplayInput.split("");
 
-    console.log(splitInput);
+    console.log(`first array: ${splitInput}`);
 
  
 
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
     let index = findIndexOfCurrentNumber(splitInput);
+    console.log(`index of first number: ${index}`)
     deleteFromDisplayInput(splitInput, index);
-    console.log(splitInput);
+    console.log(`after deleting first number: ${splitInput}`);
 
     let operator;
     let nextNumber = 0;
 
-
-
-    // let operator = findOperatorFromDisplayInput(splitInput);
-    // console.log(operator);
-    // let index = findIndexOfCurrentOperator(splitInput);
-
-    // // delete current operator to find next number and operator.
-    // deleteFromDisplayInput(splitInput, index);
-    // console.log(splitInput);
-
-    // //obtain next number from the display input
-    // let nextNumber = Number(findNumberFromDisplayInput(splitInput));
-    // index = findIndexOfCurrentNumber(splitInput);
-
-    // // delete next number, using its index
-    // deleteFromDisplayInput(splitInput, index);
-    // console.log(splitInput);
-
-
     // start loop here
     while (splitInput.length != 0) {
-        operator = findOperatorFromDisplayInput(splitInput);
+        console.log('does operator exist');
+        console.log(isOperatorExists(splitInput));
+        if (isOperatorExists(splitInput)) {
+            operator = findOperatorFromDisplayInput(splitInput);
+        }
         console.log(`operator: ${operator}`);
         index = findIndexOfCurrentOperator(splitInput);
         console.log(`operator index: ${index}`)
         deleteFromDisplayInput(splitInput, index);
-        console.log(splitInput);
+        console.log(`after deleting operator: ${splitInput}`);
 
         nextNumber = Number(findNumberFromDisplayInput(splitInput));
-        index = findIndexOfCurrentNumber(splitInput);
-        console.log(`index of next number: ${index}`);
+        if (isOperatorExists(splitInput)) {
+            index = findIndexOfCurrentNumber(splitInput);
+        } else {index = Number(findIndexOfCurrentNumber(splitInput))+1} //not sure if this does anything
+         console.log(`index of next number: ${index}`);
+       
+       
         deleteFromDisplayInput(splitInput, index);
-        console.log(splitInput);
+        console.log(`after deleting next number: ${splitInput}`);
 
         // set current output to the firstNumber variable
         let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
-        console.log(currentCalculationOutput)
+        console.log(`current calc output: ${currentCalculationOutput}`)
 
         // set current output to first number
         firstNumber = currentCalculationOutput;

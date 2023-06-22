@@ -59,11 +59,8 @@ function getCurrentDisplayInput() {
 }
 
 function evaluateDisplay() {
-    
-    const currentDisplayInput = getCurrentDisplayInput();
-    const splitInput = currentDisplayInput.split("");
 
-    // convert from string to numbers
+     // convert from string to numbers
     function findNumberFromDisplayInput(splitInput) {
         let currentNumber = '';
         for (i in splitInput) {
@@ -74,10 +71,11 @@ function evaluateDisplay() {
     }
 
     function findIndexOfCurrentNumber(splitInput) {
+        if (splitInput.length == 0) return 0;
         for (i in splitInput) {
             if (splitInput[i] == "+" || splitInput[i] == "-" || splitInput[i] == "*" || splitInput[i] == "/") break;
             }
-            return i;
+        return Number(i); //testing index
     }
 
     function findOperatorFromDisplayInput(splitInput) {
@@ -87,32 +85,68 @@ function evaluateDisplay() {
 
     function findIndexOfCurrentOperator(splitInput) {
             const operator = splitInput.find(char => char == "+" || char == "-" || char == "*" || char == "/" );
-        return splitInput.indexOf(operator)+1;
+        return Number(splitInput.indexOf(operator))+1; // testing the original index rather than index+0
     }
 
     function deleteFromDisplayInput(splitInput, index) {
-        return splitInput.splice(0, index)
+        return splitInput.splice(0, index) //must be index+1; if index is 0, then the length of splice must be 1.
+    }  
+
+    function isOperatorExists(splitInput) {
+        return (splitInput.includes("+") || splitInput.includes("-") ||splitInput.includes("*") ||splitInput.includes("/"));
     }
+    
+
+    const currentDisplayInput = getCurrentDisplayInput();
+    const splitInput = currentDisplayInput.split("");
+
+    console.log(splitInput);
+
+ 
 
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
-    let operator = findOperatorFromDisplayInput(splitInput);
-    console.log(operator);
-    let index = findIndexOfCurrentOperator(splitInput);
-
-    // delete current operator to find next number and operator.
+    let index = findIndexOfCurrentNumber(splitInput);
     deleteFromDisplayInput(splitInput, index);
+    console.log(splitInput);
 
-    //obtain next number from the display input
-    let nextNumber = Number(findNumberFromDisplayInput(splitInput));
-    index = findIndexOfCurrentNumber(splitInput);
+    let operator;
+    let nextNumber = 0;
 
-    // delete next number, using its index
-    deleteFromDisplayInput(splitInput, index);
+
+
+    // let operator = findOperatorFromDisplayInput(splitInput);
+    // console.log(operator);
+    // let index = findIndexOfCurrentOperator(splitInput);
+
+    // // delete current operator to find next number and operator.
+    // deleteFromDisplayInput(splitInput, index);
+    // console.log(splitInput);
+
+    // //obtain next number from the display input
+    // let nextNumber = Number(findNumberFromDisplayInput(splitInput));
+    // index = findIndexOfCurrentNumber(splitInput);
+
+    // // delete next number, using its index
+    // deleteFromDisplayInput(splitInput, index);
+    // console.log(splitInput);
 
 
     // start loop here
     while (splitInput.length != 0) {
+        operator = findOperatorFromDisplayInput(splitInput);
+        console.log(`operator: ${operator}`);
+        index = findIndexOfCurrentOperator(splitInput);
+        console.log(`operator index: ${index}`)
+        deleteFromDisplayInput(splitInput, index);
+        console.log(splitInput);
+
+        nextNumber = Number(findNumberFromDisplayInput(splitInput));
+        index = findIndexOfCurrentNumber(splitInput);
+        console.log(`index of next number: ${index}`);
+        deleteFromDisplayInput(splitInput, index);
+        console.log(splitInput);
+
         // set current output to the firstNumber variable
         let currentCalculationOutput = operate(firstNumber, operator, nextNumber);
         console.log(currentCalculationOutput)
@@ -120,17 +154,19 @@ function evaluateDisplay() {
         // set current output to first number
         firstNumber = currentCalculationOutput;
         console.log(firstNumber)
-        // find next operator
-        operator = findOperatorFromDisplayInput(splitInput);
-        // delete next operator
-        deleteFromDisplayInput(splitInput, index);
+    //     // find next operator
+    //     operator = findOperatorFromDisplayInput(splitInput);
+    //     // delete next operator
+    //     deleteFromDisplayInput(splitInput, index);
 
-        // find next number
-        nextNumber = Number(findNumberFromDisplayInput(splitInput));
-        console.log(nextNumber)
-        deleteFromDisplayInput(splitInput, index);
+    //     // find next number
+    //     nextNumber = Number(findNumberFromDisplayInput(splitInput));
+    //     console.log(nextNumber)
+    // // index = findIndexOfCurrentNumber(splitInput);
 
-        currentCalculationOutput = operate(firstNumber, operator, nextNumber);
+    //     deleteFromDisplayInput(splitInput, index);
+
+    //     currentCalculationOutput = operate(firstNumber, operator, nextNumber);
 
         populateDisplayWithCalculation(currentCalculationOutput)
     }
@@ -141,9 +177,28 @@ function clearDisplay() {
     displayInput.textContent = "";
 }
 
+function backspace() {
+    const displayInput = document.querySelector("#display");
+    displayInput.textContent = displayInput.textContent.slice(0, -1);
+
+}
+
 const equalButton = document.querySelector("#equal-button");
 
 equalButton.addEventListener('click', evaluateDisplay);
 
 const allClearButton = document.querySelector("#all-clear-button");
 allClearButton.addEventListener('click', clearDisplay);
+
+const backspaceButton = document.querySelector("#backspace-button");
+backspaceButton.addEventListener('click', backspace);
+
+// console.log('test display input');
+// getCurrentDisplayInput();
+
+// let testString = '7+8+9+10';
+// let testArray = testString.split("");
+// console.log(testArray);
+// for (i in testArray) {
+//     console.log(i);
+// }

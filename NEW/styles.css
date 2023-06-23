@@ -15,23 +15,38 @@ body {
 #outer-body{
     width: 700px;
     height: 800px;
-    border: red solid 1px;
+    /* border: red solid 1px; */
     border-radius: 50% 50% 50% 50%/ 60% 60% 40% 40%;
     display: flex;
     flex-direction: column;
-    box-shadow: 10px 10px;
+    box-shadow: 
+        10px 10px 10px #97B09F,
+        inset 0px -2px 26px 0px green;
     background-color: white;
-    background-image: url(imageedit_22_2090522063.gif);
-    /* background-repeat: no-repeat; */
-    /* background-position: center; */
-
-    /* background-attachment: fixed; */
-    
-   
+    background-image: url(imageedit_22_2090522063.png);
+    background-size: 500px 500px;
 }
+
 #header {
     display: flex;
     justify-content: center;
+}
+
+#header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#header-container p {
+    font-family: 'Cherry Bomb One', cursive;
+    background-color: #2280B5;
+    border-radius: 10px;
+    border: solid 1px;
+    color: white;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 #logo {
@@ -62,8 +77,15 @@ body {
     /* justify-self: center; */
 }
 
+#background-around-display {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 #display-container {
     background-color: #A6A097;
+    box-shadow: inset 10px 0px 10px;
 
     display: flex;
     justify-content: center;
@@ -73,8 +95,10 @@ body {
 }
 
 #display {
+    box-shadow: inset 10px 0px 10px;
 
-    border-top: 4px #32302E solid;
+
+    /* border-top: 4px #32302E solid; */
     border-radius: 20px;
     padding-right: 10px;
     padding-top: 10px;

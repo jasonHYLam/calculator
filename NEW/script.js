@@ -28,11 +28,22 @@ function operate(firstNumber, operator, secondNumber) {
     }
 }
 
+let resetCondition = false;
+
+function isResetConditionTrue() {
+    return resetCondition;
+}
+
 const input= document.querySelectorAll(".input");
 
+// if reset condition is true (eg. error message appears) then reset display before adding input.
 input.forEach(input=> {
     input.addEventListener('click', (e) => {
+        if (isResetConditionTrue()) {
+            clearDisplay();
+        }
         populateDisplayWithInput(e.target.textContent);
+        resetCondition = false;
     } )
 })
 
@@ -74,6 +85,7 @@ function populateDisplayWithFail() {
     let display = document.querySelector("#display");
     let fail = '>_<';
     display.textContent = fail;
+    resetCondition = true;
 }
 
 function getCurrentDisplayInput() {
@@ -126,13 +138,13 @@ function evaluateDisplay() {
     const currentDisplayInput = getCurrentDisplayInput();
 
 
-    // if string ends with /0
+    // if string ends with /0, display error message and return.
     if (currentDisplayInput.endsWith('/0')) {
         populateDisplayWithFail();
         return;
     }
 
-    // if string begins with an operator
+    // if string begins with an operator, display error message and return.
     if (
         currentDisplayInput.startsWith('+') || 
         currentDisplayInput.startsWith('-') ||

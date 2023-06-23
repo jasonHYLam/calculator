@@ -112,33 +112,10 @@ body {
 }
 #container{
     display: flex;
+    flex-direction: column;
     margin-top: 25px;
+    gap: 30px;
 }
-
-#left-container {
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-    gap: 20px;
-}
-
-#right-container-container {
-    display: flex;
-    
-}
-
-#right-container {
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-    gap: 20px;
-    /* margin-right: 20px; */
-}
-
-#right-container div {
-    display: flex;
-}
-
 
 #operators {
     display: flex;
@@ -178,8 +155,8 @@ button:active {
 }
 
 .decimal {
-    width: 170px;
-    flex: 2;
+    /* width: 170px; */
+    /* flex: 2; */
 }
 
 #row4 {

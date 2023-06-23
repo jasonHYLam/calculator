@@ -1,5 +1,5 @@
 # The Odin Project: Calculator Project
-![screenshot](/NEW/Screenshot_2023-06-23_14-13-58.png)
+![screenshot](/Screenshot_2023-06-23_14-13-58.png)
 
 ## Goals
 To create a working calculator using Javascript and HTML, and stylising using CSS.

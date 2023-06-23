@@ -108,6 +108,7 @@ body {
     height: 70px;
     font-family: "digital-7mono";
     font-size: 65px;
+    overflow: hidden;
 }
 #container{
     display: flex;

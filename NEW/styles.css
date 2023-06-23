@@ -4,6 +4,10 @@
     font-family: "digital-7mono";
     src: url("Assets/digital-7\ \(mono\).ttf");
 }
+
+:root {
+    --body-color: #FBD096;
+}
 body {
     margin: 0;
 }
@@ -34,7 +38,6 @@ body {
     box-shadow: 
         20px 30px 10px #97B09F,
         inset 0px -2px 26px 0px green;
-    background-color: white;
     background-image: url(imageedit_22_2090522063.png);
     background-size: 500px 500px;
 }
@@ -132,7 +135,7 @@ body {
 }
 
 button {
-    background-color: #FFF248;
+    background-color: #F2DC3F;
     width: 55px;
     height: 55px;
     border-radius: 50%;

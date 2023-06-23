@@ -1,6 +1,6 @@
-#Calculator Project
+# Calculator Project
 
-##Goals
+## Goals
 To create a working calculator using Javascript and HTML, and stylising using CSS.
 
 Evaluates a pair of numbers at a time.

@@ -14,10 +14,6 @@ function divide(a, b) {
     return a/b;
 }
 
-// let firstNumber = 0;
-// let operator; 
-// let secondNumber = 0;
-
 // calls the above functions depending on value of operator.
 function operate(firstNumber, operator, secondNumber) {
     switch (operator) {
@@ -37,7 +33,6 @@ const input= document.querySelectorAll(".input");
 input.forEach(input=> {
     input.addEventListener('click', (e) => {
         populateDisplayWithInput(e.target.textContent);
-        // console.log(e.target.textContent);
     } )
 })
 
@@ -73,6 +68,12 @@ function populateDisplayWithInput(input) {
 function populateDisplayWithCalculation(calculation) {
     let display = document.querySelector("#display");
     display.textContent = calculation;
+}
+
+function populateDisplayWithFail() {
+    let display = document.querySelector("#display");
+    let fail = '>_<';
+    display.textContent = fail;
 }
 
 function getCurrentDisplayInput() {
@@ -123,6 +124,24 @@ function evaluateDisplay() {
     
 
     const currentDisplayInput = getCurrentDisplayInput();
+
+
+    // if string ends with /0
+    if (currentDisplayInput.endsWith('/0')) {
+        populateDisplayWithFail();
+        return;
+    }
+
+    // if string begins with an operator
+    if (
+        currentDisplayInput.startsWith('+') || 
+        currentDisplayInput.startsWith('-') ||
+        currentDisplayInput.startsWith('*') ||
+        currentDisplayInput.startsWith('/')) {
+            populateDisplayWithFail();
+            return;
+        }
+
     const splitInput = currentDisplayInput.split("");
 
 
@@ -131,14 +150,10 @@ function evaluateDisplay() {
     if (!Number.isInteger(Number(lastChar))) return;
 
 
-
-
     //obtain first number from display input
     let firstNumber = Number(findNumberFromDisplayInput(splitInput));
     let index = findIndexOfCurrentNumber(splitInput);
     deleteFromDisplayInput(splitInput, index);
-
-
 
     let operator;
     let nextNumber = 0;
@@ -189,7 +204,3 @@ allClearButton.addEventListener('click', clearDisplay);
 
 const backspaceButton = document.querySelector("#backspace-button");
 backspaceButton.addEventListener('click', backspace);
-
-let testString = '1.2';
-console.log(testString)
-console.log(Number(testString));

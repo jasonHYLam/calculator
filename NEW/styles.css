@@ -8,12 +8,20 @@ body {
     margin: 0;
 }
 #background {
-    padding: 4vh;
+    /* padding: 4vh; */
     display: flex;
+    flex-direction: column;
     /* background-color: #2d4d42; */
     background-color: whitesmoke;
     justify-content: center;
     height: 100vh;
+    align-items: center;
+}
+
+#title {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 70px;
+    color: #3D708F;
 }
 
 #outer-body{
